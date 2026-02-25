@@ -7,7 +7,7 @@ This repository contains only R code files and supplementary files. The data fil
 
 ## Data access
 
-The original data can be obtained from the Research Programme in Historical Demography (Programme de recherche en démographie historique, PRDH) by writing directly to the project director, Lisa Dillon (ly.dillon@umontreal.ca).
+The original data can be obtained from the Research Programme in Historical Demography (_Programme de recherche en démographie historique_, PRDH) by writing directly to the project director, Lisa Dillon (ly.dillon@umontreal.ca).
 
 This paper uses the July 2025 version of the Population Register of Historic Quebec (Registre de la population du Québec ancien, RPQA). For an exact replication, please request the July 2025 version with the following files:
 
@@ -28,11 +28,12 @@ Regardless of the version of the file, you need the following columns:
 - year of foundation
 - province or state
 
-In addition, find in the repository the following file:
+In addition, find in the repository the following files:
 
-- censuses_dates.xlsx
+- data_aux/censuses_dates.xlsx
+- data_aux/linkage_reliability.csv
 
-This file provides the exact dates associated with the censuses that were integrated in the database so that they can be used as observations in the timeline construction process.
+The first file provides the exact dates associated with the censuses that were integrated in the database so that they can be used as observations in the timeline construction process. The second file provides assessments of linkage quality which are used to unlink about 100 records. I also provide code for assessing linkage quality but it takes a long time to run.
 
 
 ## Running the files
