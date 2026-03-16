@@ -38,6 +38,6 @@ The first file provides the exact dates associated with the censuses that were i
 
 ## Running the files
 
-The order in which files should be run is given in the file master.R. The construction of the timelines is currently very computationally demanding and takes a couple of days to run. I hope to eventually be able to make a faster version available.
+The order in which files should be run is given in the file master.R. The construction of the timelines is currently very computationally demanding and takes a few days to run on a personal computer. I hope to eventually be able to make a faster version available.
 
-Once the timelines are constructed, the analytic part of the code is not overly computationally demanding and does not modify the timeline files.
+Once the timelines are constructed, the analytic part of the code (from \texttt{get_moves.R} onwards) is not overly computationally demanding and does not modify the timeline files, so it can be run multiple times.
