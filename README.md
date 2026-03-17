@@ -1,4 +1,4 @@
-# Replication materials for Multigenerational and gender-symmetric transmission of migration behaviors in historical Quebec (Côté-Gendreau 2026)
+# Replication materials for paper: Multigenerational and gender-symmetric transmission of migration behaviors in historical Quebec (Côté-Gendreau 2026)
 
 Welcome to the GitHub repository that will allow you to replicate the paper "Multigenerational and gender-symmetric transmission of migration behaviors in historical Quebec" (PNAS, 2026).
 
