@@ -1,8 +1,6 @@
 options(scipen = 999)
 
 print("ATTENTION: Please set the working directory to the replication directory")
-setwd("~/Dropbox\ (Princeton)/Dissertation/Multigenerational/PNAS/Replication")
-setwd("C:/Users/mc76/Princeton Dropbox/Marielle Cote-Gendreau/Dissertation/Multigenerational/PNAS/replication")
 
 # Create directories
 if (!dir.exists("data_raw")) {dir.create("data_raw")}
@@ -15,6 +13,7 @@ print("ATTENTION: Put all data files obtained from PRDH in folder data_raw")
 
 # 0. Run the file that treats the parish file
 # You might need to rename columns or adapt the beginning of the code depending on the file that you are given
+
 source("code/distance_matrix.R")
 
 # 1. Run the file that prepares the original data
