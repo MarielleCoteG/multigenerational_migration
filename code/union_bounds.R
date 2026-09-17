@@ -49,10 +49,11 @@ real_s <- mentions %>%
 conceptions <- real_b %>% 
   bind_rows(real_s %>% filter(!(idInd %in% real_b$idInd))) %>% 
   filter(stillborn == 1 | (!is.na(Age_tf) & Age_tf <= 366) | str_sub(Age,-1,-1) %in% c("m","s")) %>% 
-  mutate(DateEvent_mod = if_else(DateEvent_precise == 99999999, 
-                                     ymd(Date_precise) - ddays(Age_tf),
-                                     ymd(DateEvent_precise) - ddays(Age_tf),
-                                     missing = NA_Date_),
+  mutate(DateEvent_mod = dplyr::case_when(DateEvent_precise == 99999999 & !is.na(Age_tf) & (Type == "b" | stillborn == 1) ~ ymd(Date_mod_precise) - ddays(Age_tf),
+                                          DateEvent_precise == 99999999 & (Type == "b" | stillborn == 1) ~ ymd(Date_mod_precise),
+                                          Type == "b" | stillborn == 1 ~ ymd(DateEvent_precise),
+                                          Type == "s" & DateEvent_precise == 99999999 & !is.na(Age_tf) ~ ymd(Date_mod_precise) - ddays(Age_tf),
+                                          Type == "s" ~ ymd(DateEvent_precise) - ddays(Age_tf)),
          DateEvent_mod = as.Date(DateEvent_mod)) %>% 
   left_join(select(inds,idMother,idFather,idInd)) %>% 
   mutate(Date_conception = DateEvent_mod - dweeks(40)) %>% 

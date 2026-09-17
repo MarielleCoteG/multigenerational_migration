@@ -45,7 +45,7 @@ load_estimate_DOB <- function() {
     write_csv("data_modif/unions_bounds_mod.csv")
   
   mentions <- read_csv("data_modif/mentions_mod.csv", guess_max = 5000) %>% 
-    filter(Type != "b") %>% 
+    filter(!(Type == "b" & Role == 1)) %>% 
     mutate(Age_tf = ddays(Age_tf),
            Date_mod_precise = ymd(Date_mod_precise),
            DateEvent_precise = ymd(DateEvent_precise)) %>% 
@@ -53,6 +53,7 @@ load_estimate_DOB <- function() {
     arrange(DateEv)
   
   mentions_age <<- mentions %>% 
+    filter(Type != "b") %>% 
     filter(!is.na(Age_tf)) %>% 
     select(idInd,idAct,Age_tf,DateEv,Type,Role) %>% 
     mutate(Age_tf = as.numeric(Age_tf,units="years"),
@@ -149,7 +150,6 @@ estimate_DOB <- function(time_gap = 5, central = "median") {
     dplyr::left_join(age_error_central,join_by(Age_num == Age_tf)) %>% 
     mutate(maj_threshold = Date_fm-dyears(21)) %>% 
     mutate(DateM1_mother = dplyr::if_else(QualityDateM1_mother <= 3, as.Date(DateM1_mother), NA_Date_),
-           DateM1 = dplyr::if_else(QualityDateM1 <= 3, as.Date(DateM1), NA_Date_),
            DateChild1_mother = dplyr::if_else(QualityDateChild1_mother <= 5, as.Date(DateChild1_mother), NA_Date_),
            DateChildn = dplyr::if_else(QualityDateChildn <= 5, as.Date(DateChildn), NA_Date_),
            DateMother_55 = dplyr::if_else(QualityDateBirth_mother <= 5,DOB_mother + dyears(55),NA_Date_),

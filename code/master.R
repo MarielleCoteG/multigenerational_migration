@@ -13,7 +13,6 @@ print("ATTENTION: Put all data files obtained from PRDH in folder data_raw")
 
 # 0. Run the file that treats the parish file
 # You might need to rename columns or adapt the beginning of the code depending on the file that you are given
-
 source("code/distance_matrix.R")
 
 # 1. Run the file that prepares the original data
@@ -36,7 +35,7 @@ source("code/estimate_DOB.R")
 
 # 5. Run the file that creates timelines at the union level
 
-source("code/timelines_union.R")
+source("code/timelines_unions.R")
 
 # 6. Clean union-level timelines
 

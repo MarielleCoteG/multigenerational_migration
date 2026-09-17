@@ -73,7 +73,7 @@ load_estimate_DOD <- function() {
 
 # time_gap is the maximum number of years between the minimum and maximum dates of death to interpolate
 # conservative 
-estimate_DOD <- function(time_gap = 5, conservative = 1) {
+estimate_DOD <- function(time_gap = 5, conservative = 0) {
   
   list_of_objects <- c("inds","unions","mentions","real_b","real_s","conceptions",
                        "unions_bound","trustworthy_ms","mentions_revised","first_d",

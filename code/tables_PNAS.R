@@ -88,10 +88,6 @@ print(unions %>% left_join(select(inds,idWife=idInd,flag_DOB_est,flag_DOD_est,DO
 
 # Check for how often brothers marry relatives
 
-return_prop <- movers_statuses %>% 
-  filter(adulthood_move == 1, Date_move - DateU_first >= ddays(2), Date_move - DateU_first < dyears(window)) %>% 
-  filter(idI %in% unions$idHomme | idI %in% unions$idFemme)
-
 pl_brothers <- read_csv("data_modif/pl_brothers.csv")
 
 pl_brothers <- pl_brothers %>% 
@@ -109,10 +105,10 @@ pl_brothers <- pl_brothers %>%
                              T ~ 0))
 
 print("Distribution of couples by whether the placebo wife is a full sister (2), a half-sister (1) or not a sister to the real wife:")
-table(pl_brothers$sisters)
+print(table(pl_brothers$sisters))
 
 print("Distribution of couples by whether the placebo wife shares 2+ grandparents (2), 1 grandparent (1) or none with the real wife:")
-table(pl_brothers$cousins)
+print(table(pl_brothers$cousins))
 
 # Check for return migration
 print("Proportion of migratory couples who have migrated at least once within the first twenty years of their marriage once to a place where they, their parents and their grandparents have never resided:")
@@ -130,8 +126,8 @@ urban_parishes <- c(mtl,qc,tr,sherbrooke)
 
 types_moves <- unions %>% 
   filter(mig_u == 1) %>% 
-  dplyr::left_join(select(parishes,codeP,year_parish_A=annee), join_by(Par_A == codeP)) %>% 
-  dplyr::left_join(select(parishes,codeP,year_parish_B=annee), join_by(Par_B == codeP)) %>% 
+  dplyr::left_join(select(parishes,CodeLocation,year_parish_A=year_par), join_by(Par_A == CodeLocation)) %>% 
+  dplyr::left_join(select(parishes,CodeLocation,year_parish_B=year_par), join_by(Par_B == CodeLocation)) %>% 
   mutate(type_A = case_when(Par_A %in% urban_parishes ~ "Urban",
                             year(Date_move_u) - year_parish_A >= 15 ~ "Rural (established)",
                             T ~ "Rural (frontier)"),
@@ -227,7 +223,7 @@ linesep<-function(x,y=character()){
   linesep(x[-length(x)], c(rep('',x[length(x)]-1),'\\addlinespace',y))  
 }
 
-sink(file = "tables/summ_Aug2025.tex")
+sink(file = "tables/summ.tex")
 kbl(summ, align=c('l', rep('c', 2)), caption = "Descriptive statistics",
     label = "summ",
     format = "latex",booktabs=T,
